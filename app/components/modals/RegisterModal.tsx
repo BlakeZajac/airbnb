@@ -44,6 +44,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({}) => {
       })
       .finally(() => {
         setIsLoading(false);
+        toast.success("Account has been created.");
       });
   };
 

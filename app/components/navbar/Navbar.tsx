@@ -7,10 +7,12 @@ import Search from "./Search";
 import UserMenu from "./UserMenu";
 
 interface NavbarProps {
-  currentUser?: User;
+  currentUser?: User | null;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+  console.log(currentUser);
+
   return (
     <header className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b">
@@ -18,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
           <div className="flex items-center justify-between gap-3 md:gap-0">
             <Logo />
             <Search />
-            <UserMenu />
+            <UserMenu currentUser={currentUser} />
           </div>
         </Container>
       </div>
