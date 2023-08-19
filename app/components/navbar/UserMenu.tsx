@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
@@ -12,13 +12,28 @@ interface UserMenuProps {}
 const UserMenu: React.FC<UserMenuProps> = () => {
   const registerModal = useRegisterModal();
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={menuRef}>
       <div className="flex items-center gap-x-3">
         <div
           onClick={() => {}}
