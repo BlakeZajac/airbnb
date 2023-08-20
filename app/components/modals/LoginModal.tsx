@@ -9,10 +9,10 @@ import { FcGoogle } from "react-icons/fc";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import Modal from "./Modal";
-import Heading from "../Heading";
+import Heading from "../common/Heading";
 import Input from "../inputs/Input";
 import { toast } from "react-hot-toast";
-import Button from "../Button";
+import Button from "../common/Button";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 
 interface LoginModalProps {}
