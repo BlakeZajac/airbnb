@@ -33,14 +33,13 @@ model Account {
   provider          String
   providerAccountId String
   refresh_token     String? @db.String
-  access_token      String  @db.String
+  access_token      String? @db.String
   expires_at        Int?
   token_type        String?
   scope             String?
   id_token          String? @db.String
   session_state     String?
 
-  // Creates a relation with the user with field userId, referencing the user model id field
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
