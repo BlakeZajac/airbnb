@@ -47,6 +47,7 @@ const RentModal: React.FC<RentModalProps> = ({}) => {
   });
 
   const category = watch("category");
+  const location = watch("location");
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -109,7 +110,10 @@ const RentModal: React.FC<RentModalProps> = ({}) => {
           subtitle="Help guests find you."
         />
 
-        <CountrySelect />
+        <CountrySelect
+          onChange={(value) => setCustomValue("location", value)}
+          value={location}
+        />
       </div>
     );
   }
