@@ -7,6 +7,8 @@ import { format } from "date-fns";
 
 import { SafeUser } from "@/app/types";
 import useCountries from "@/app/hooks/useCountries";
+import Image from "next/image";
+import HeartButton from "../common/HeartButton";
 
 interface ListingCardProps {
   data: Listing;
@@ -63,7 +65,27 @@ const ListingCard: React.FC<ListingCardProps> = ({
     return `${format(start, "PP")} - ${format(end, "PP")}`;
   }, [reservation]);
 
-  return <div>Listing Card</div>;
+  return (
+    <div
+      onClick={() => router.push(`/listings/${data.id}`)}
+      className="col-span-1 cursor-pointer group"
+    >
+      <div className="flex flex-col gap-2 w-full">
+        <div className="aspect-square w-full relative overflow-hidden rounded-xl">
+          <Image
+            fill
+            alt="Listing"
+            src={data.imageSrc}
+            className="object-cover w-full h-full group-hover:scale-105 transition"
+          />
+
+          <div className="absolute top-3 right-3">
+            <HeartButton listingId={data.id} currentUser={currentUser} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ListingCard;
