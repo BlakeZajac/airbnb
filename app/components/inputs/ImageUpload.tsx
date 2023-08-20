@@ -2,14 +2,11 @@
 
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
-import { useCallback } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
 
 declare global {
   var cloudinary: any;
 }
-
-const uploadPreset = "waugoydo";
 
 interface ImageUploadProps {
   onChange: (value: string) => void;
@@ -17,17 +14,14 @@ interface ImageUploadProps {
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
-  const handleUpload = useCallback(
-    (result: any) => {
-      onChange(result.info.secure_url);
-    },
-    [onChange]
-  );
+  const onUpload = (result: any) => {
+    onChange(result.info.secure_url);
+  };
 
   return (
     <CldUploadWidget
-      onUpload={handleUpload}
-      uploadPreset={uploadPreset}
+      onUpload={onUpload}
+      uploadPreset="waugoydo"
       options={{
         maxFiles: 1,
       }}
