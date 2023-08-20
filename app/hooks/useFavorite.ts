@@ -40,7 +40,12 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
 
         await request();
         router.refresh();
-        toast.success("Listing added to your favourites.");
+
+        if (hasFavorited) {
+          toast.success("Listing removed from your favourites.");
+        } else {
+          toast.success("Listing added to your favourites.");
+        }
       } catch (error) {
         toast.error("Something went wrong.");
       }
