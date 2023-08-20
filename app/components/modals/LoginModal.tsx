@@ -103,7 +103,7 @@ const LoginModal: React.FC<LoginModalProps> = ({}) => {
 
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex items-center justify-center gap-1">
-          <div>Don&apos;t have an account?</div>
+          <div>First time using Airbnb?</div>
           <div
             onClick={onToggle}
             className="text-neutral-800 cursor-pointer hover:underline"

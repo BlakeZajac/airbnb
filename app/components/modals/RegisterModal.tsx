@@ -13,10 +13,12 @@ import Input from "../inputs/Input";
 import { toast } from "react-hot-toast";
 import Button from "../common/Button";
 import { signIn } from "next-auth/react";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 interface RegisterModalProps {}
 
 const RegisterModal: React.FC<RegisterModalProps> = ({}) => {
+  const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -48,6 +50,11 @@ const RegisterModal: React.FC<RegisterModalProps> = ({}) => {
         toast.success("Account has been created.");
       });
   };
+
+  const onToggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -81,6 +88,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({}) => {
       />
     </div>
   );
+
   const footerContent = (
     <div className="flex flex-col gap-4 md:gap-3 pt-1">
       <Button
@@ -101,7 +109,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({}) => {
         <div className="flex items-center justify-center gap-1">
           <div>Already have an account?</div>
           <div
-            onClick={registerModal.onClose}
+            onClick={onToggle}
             className="text-neutral-800 cursor-pointer hover:underline"
           >
             Log in
