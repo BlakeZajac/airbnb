@@ -2,7 +2,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import getListingById from "@/app/actions/getListingById";
 // import getReservations from "@/app/actions/getReservations";
 
-import ListingClient from "./ListingClient";
+import ListingClient from "../../components/listings/ListingClient";
 import ClientOnly from "@/app/components/common/ClientOnly";
 import EmptyState from "@/app/components/common/EmptyState";
 
