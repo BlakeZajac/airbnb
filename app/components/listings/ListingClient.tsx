@@ -74,7 +74,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
         setDateRange(initialDateRange);
 
         router.refresh();
-        // To do: Redirect to /trips
+        router.push("/trips");
       })
       .catch(() => {
         toast.error("Something went wrong.");
