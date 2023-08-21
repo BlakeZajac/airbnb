@@ -3,6 +3,7 @@ import EmptyState from "../components/common/EmptyState";
 
 import getCurrentUser from "../actions/getCurrentUser";
 import getReservations from "../actions/getReservations";
+import ReservationsClient from "../components/reservations/ReservationsClient";
 
 const ReservationsPage = async () => {
   const currentUser = await getCurrentUser();
@@ -33,7 +34,14 @@ const ReservationsPage = async () => {
     );
   }
 
-  return <div></div>;
+  return (
+    <ClientOnly>
+      <ReservationsClient
+        reservations={reservations}
+        currentUser={currentUser}
+      />
+    </ClientOnly>
+  );
 };
 
 export default ReservationsPage;
