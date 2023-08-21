@@ -1,8 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Heading from "./Heading";
+
 import Button from "./Button";
+import Heading from "./Heading";
 
 interface EmptyStateProps {
   title?: string;
@@ -22,7 +23,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
       <Heading center title={title} subtitle={subtitle} />
 
       <div className="w-48 mt-4">
-        {showReset ?? (
+        {showReset && (
           <Button
             outline
             label="Remove all filters"
