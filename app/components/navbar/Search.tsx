@@ -47,6 +47,8 @@ const Search: React.FC<SearchProps> = () => {
     if (guestCount) {
       return `${guestCount} Guests`;
     }
+
+    return "Add Guests";
   }, [guestCount]);
 
   return (
