@@ -40,6 +40,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({}) => {
     axios
       .post("/api/register", data)
       .then(() => {
+        toast.success("Account has been created. Please login with your details.")
         registerModal.onClose();
         loginModal.onOpen();
       })
@@ -48,7 +49,6 @@ const RegisterModal: React.FC<RegisterModalProps> = ({}) => {
       })
       .finally(() => {
         setIsLoading(false);
-        toast.success("Account has been created.");
       });
   };
 
