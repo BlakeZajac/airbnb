@@ -100,12 +100,14 @@ const ListingCard: React.FC<ListingCardProps> = ({
           </div>
 
           {onAction && actionLabel && (
-            <Button
-              disabled={disabled}
-              small
-              label={actionLabel}
-              onClick={handleCancel}
-            />
+            <div className="mt-4">
+              <Button
+                disabled={disabled}
+                small
+                label={actionLabel}
+                onClick={handleCancel}
+              />
+            </div>
           )}
         </div>
       </div>

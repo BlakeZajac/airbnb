@@ -24,15 +24,11 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       type="button"
-      className={`relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full ${
+      className={`relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition font-semibold w-full ${
         outline
           ? "bg-white border-[#dadada] text-black hover:bg-black/5"
           : "bg-rose-500 border-rose-500 text-white"
-      } ${
-        small
-          ? "py-1 text-sm font-light border"
-          : "py-3 text-md font-semibold border-2"
-      }`}
+      } ${small ? "py-2 text-sm  border" : "py-3 text-md border-2"}`}
     >
       {Icon && <Icon size={24} className="absolute left-4 top-3" />}
       {label}
