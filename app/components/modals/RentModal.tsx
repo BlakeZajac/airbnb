@@ -192,7 +192,7 @@ const RentModal: React.FC<RentModalProps> = ({}) => {
         <hr />
 
         <Counter
-          title="Bathrooms of guests"
+          title="Bathrooms"
           subtitle="How many bathrooms do you have?"
           value={bathroomCount}
           onChange={(value) => setCustomValue("bathroomCount", value)}

@@ -85,11 +85,11 @@ const ListingCard: React.FC<ListingCardProps> = ({
         </div>
 
         <div className="flex flex-col">
-          <div className="font-semibold text-lg">
+          <div className="font-semibold">
             {location?.region}, {location?.label}
           </div>
 
-          <div className="font-light text-neutral-500">
+          <div className="font-light text-neutral-500 text-sm">
             {reservationDate || data.category}
           </div>
 
