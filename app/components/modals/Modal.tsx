@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../common/Button";
 
@@ -30,6 +30,7 @@ const Modal: React.FC<ModalProps> = ({
   secondaryActionLabel,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -53,6 +54,30 @@ const Modal: React.FC<ModalProps> = ({
 
     onSubmit();
   }, [onSubmit, disabled]);
+
+  useEffect(() => {
+    if (isOpen) {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          handleClose();
+        }
+      };
+
+      const handleOutsideClick = (event: any) => {
+        if (modalRef.current && !modalRef.current.contains(event.target)) {
+          handleClose();
+        }
+      };
+
+      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener("mousedown", handleOutsideClick);
+
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+        document.removeEventListener("mousedown", handleOutsideClick);
+      };
+    }
+  }, [isOpen, handleClose]);
 
   const handleSecondaryAction = useCallback(() => {
     if (disabled || !secondaryAction) {
@@ -84,6 +109,7 @@ const Modal: React.FC<ModalProps> = ({
             <div
               className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex
             flex-col w-full bg-white outline-none focus:outline-none"
+              ref={modalRef}
             >
               {/* Header */}
               <div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
