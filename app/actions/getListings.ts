@@ -1,6 +1,6 @@
 import prisma from "@/app/libs/prismadb";
 
-export interface IListingParams {
+export interface IListingsParams {
   userId?: string;
   guestCount?: number;
   roomCount?: number;
@@ -11,16 +11,16 @@ export interface IListingParams {
   category?: string;
 }
 
-export default async function getListings(params: IListingParams) {
+export default async function getListings(params: IListingsParams) {
   try {
     const {
       userId,
-      guestCount,
       roomCount,
+      guestCount,
       bathroomCount,
+      locationValue,
       startDate,
       endDate,
-      locationValue,
       category,
     } = params;
 
@@ -36,20 +36,17 @@ export default async function getListings(params: IListingParams) {
 
     if (roomCount) {
       query.roomCount = {
-        // Query listings from room count the user sent, filtering everything out that's greater than
         gte: +roomCount,
       };
     }
 
     if (guestCount) {
-      // Query listings from guest count the user sent, filtering everything out that's greater than
       query.guestCount = {
         gte: +guestCount,
       };
     }
 
     if (bathroomCount) {
-      // Query listings from bathroom count the user sent, filtering everything out that's greater than
       query.bathroomCount = {
         gte: +bathroomCount,
       };
@@ -59,9 +56,6 @@ export default async function getListings(params: IListingParams) {
       query.locationValue = locationValue;
     }
 
-    // Filter out all reservations that have a reservation in the users selected date range
-    // If there is a signle day in the reservation date range, we filter out the listing from
-    // showing in the search results as the user can not make a reservation within that date range.
     if (startDate && endDate) {
       query.NOT = {
         reservations: {
@@ -84,7 +78,9 @@ export default async function getListings(params: IListingParams) {
 
     const listings = await prisma.listing.findMany({
       where: query,
-      orderBy: { createdAt: "desc" },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     const safeListings = listings.map((listing) => ({
