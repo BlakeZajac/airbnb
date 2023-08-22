@@ -127,7 +127,7 @@ const Categories: React.FC<CategoriesProps> = () => {
 
   return (
     <Container>
-      <div className="pt-4 flex items-center justify-between overflow-x-auto">
+      <div className="pt-2 flex items-center justify-between overflow-x-auto">
         {categories.map((item) => (
           <CategoryBox
             key={item.label}
